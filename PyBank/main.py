@@ -30,7 +30,7 @@ with open('./Resources/budget_data.csv') as data_file:
     #Calculate the average change
     average_change = sum(revenue_change) / (len(change)-1)
     print("Average Change: $",average_change)
-'''
+
     #find the greates increase and decrease
     great_increase = max(revenue_change)
     great_decrease = min(revenue_change)
@@ -40,4 +40,3 @@ with open('./Resources/budget_data.csv') as data_file:
     month_great_decrease = date[great_decrease_index + 1]
     print("Greatest Increase in Profits:", month_great_increase, "($", great_increase, ")")
     print("Greatest Decrease in Profits:", month_great_decrease, "($", great_decrease, ")")
-'''

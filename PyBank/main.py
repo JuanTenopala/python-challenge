@@ -7,38 +7,36 @@ with open('./Resources/budget_data.csv') as data_file:
 
     #create a list to manipulate the data
     csv_header = next(csvreader)
-    list = []
     change = []
+    date = []
     
-    #attach the second row to the list and remove the headers using pop
+
     for row in csvreader:
-            #print(row[0], row[1]) #used only to verify the data was correctly impoted
-            list.append(int(row[1]))
-    
-#print(list) #used only to verify the data in the list
+         change.append(int(row[1]))
+         date.append(row[0])
 
-#Ser the variable "profit"
-    profit = 0
+    months = len(date)
+    print("Total Months:",months)
 
-#Count and prin the total number of months
-    for row in list:
-        months = sum(1 for row in list)
-    print("Total Months: ", months)
+    total = sum(change)   #print(str(sum(change)))
+    print("Total: $",total)
+         
+         
+    revenue_change = []
 
-    #Sum and print the total profit in the changes
-    for row in list:
-        profit = profit + int(row)
-    print("Total: $", profit)
+    for x in range(1, len(change)):
+         revenue_change.append((int(change[x]) - int(change[x-1])))
 
     #Calculate the average change
-    for x in range(1, len(list)):
-         change.append((int(list[x]) - int(list[x-1])))
-         
-    average_change = sum(change) / len(change)
-    print(average_change)
+    average_change = sum(revenue_change) / (len(change)-1)
+    print("Average Change: $",average_change)
 
     #find the greates increase and decrease
-    great_increase = max(change)
-    great_decrease = min(change)
-    print("Greatest Increase in Profits: ", great_increase)
-    print("Greatest Decrease in Profits: ", great_decrease)
+    great_increase = max(revenue_change)
+    great_decrease = min(revenue_change)
+    great_increase_index = revenue_change.index(great_increase)
+    great_decrease_index = revenue_change.index(great_decrease)
+    month_great_increase = date[great_increase_index + 1]
+    month_great_decrease = date[great_decrease_index + 1]
+    print("Greatest Increase in Profits:", month_great_increase, "($", great_increase, ")")
+    print("Greatest Decrease in Profits:", month_great_decrease, "($", great_decrease, ")")
